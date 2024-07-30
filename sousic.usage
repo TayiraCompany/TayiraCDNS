@@ -1,0 +1,63 @@
+ import {Frontend} from "./sousic@0.1.5/Frontend/FrontEndFile.js";
+
+ const frontend = new Frontend();
+ const output = document.getElementById("output");
+
+ function writeLine(text) {
+   const p = document.createElement("p");
+   p.textContent = text;
+   output.appendChild(p);
+ }
+
+ let money = frontend.int(50);
+ let name = frontend.string("John Doe");
+ let isActive = frontend.bool(true);
+ let temperature = frontend.float(36.6);
+ let pi = frontend.double(3.141592653589793);
+ let initial = frontend.char("J");
+
+ writeLine(`Money: ${money.value}`);
+ writeLine(`Name: ${name.value}`);
+ writeLine(`Is Active: ${isActive.value}`);
+ writeLine(`Temperature: ${temperature.value}`);
+ writeLine(`Pi: ${pi.value}`);
+ writeLine(`Initial: ${initial.value}`);
+
+ let MyClass = frontend.defineClass("MyClass", function () {
+   this.public("money", frontend.int(100));
+   this.private("secret", frontend.string("hidden"));
+   this.staticMember("pi", frontend.double(3.1415));
+   this.voidMethod(() => {
+     writeLine("This is a void function.");
+   });
+ });
+
+ let myClassInstance = new MyClass();
+ writeLine(`Public Money: ${myClassInstance.public("money")}`);
+ writeLine(`Static Pi: ${MyClass.static.pi.value}`);
+ myClassInstance.voidMethod(() => {
+   writeLine("This is a void function.");
+ });
+ writeLine(`Math Max: ${Frontend.MathFunctions.Max(5, 10)}`);
+
+ let cars = [
+   frontend.string("Volvo"),
+   frontend.string("BMW"),
+   frontend.string("Ford"),
+   frontend.string("Mazda"),
+ ];
+
+ writeLine(`Car 0: ${cars[0].value}`);
+ cars[0] = frontend.string("Opel");
+ writeLine(`Updated Car 0: ${cars[0].value}`);
+
+ let myNum = [
+   frontend.int(10),
+   frontend.int(20),
+   frontend.int(30),
+   frontend.int(40),
+ ];
+ writeLine(`Number 0: ${myNum[0].value}`);
+
+ Frontend.print.WriteLine(money.value);
+ Frontend.print;
