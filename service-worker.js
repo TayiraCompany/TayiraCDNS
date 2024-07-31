@@ -12,7 +12,9 @@ const RESOURCES_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(RESOURCES_TO_CACHE);
+      return cache.addAll(RESOURCES_TO_CACHE).catch((error) => {
+        console.error('Failed to cache resources:', error);
+      });
     })
   );
 });
@@ -46,9 +48,10 @@ self.addEventListener('fetch', (event) => {
           cache.put(event.request, response.clone());
           return response;
         });
+      }).catch((error) => {
+        console.error('Fetch failed:', error);
+        return new Response('حدث خطأ في الشبكة.');
       });
-    }).catch(() => {
-      return new Response('حدث خطأ في الشبكة.');
     })
   );
 });
