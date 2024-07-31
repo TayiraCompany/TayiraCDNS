@@ -5,7 +5,7 @@ const RESOURCES_TO_CACHE = [
   '/',
   '/index.html',
   '/styles.css',
-  '/script.js'
+  '/spidermix.min.js' // إضافة spidermix.min.js إلى قائمة الموارد
 ];
 
 // أثناء تثبيت الـ Service Worker، قم بتخزين الموارد المحددة
